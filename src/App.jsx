@@ -81,9 +81,9 @@ function App() {
 
             <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
 
-            <main className="flex-1 h-screen overflow-y-auto relative">
+            <main className="flex-1 min-h-screen overflow-y-auto relative print:overflow-visible print:h-auto">
                 {/* Top Header Bar */}
-                <header className="sticky top-0 z-30 flex items-center justify-between px-4 md:px-8 py-4 glass border-b border-slate-800/50">
+                <header className="sticky top-0 z-30 flex items-center justify-between px-4 md:px-8 py-4 glass border-b border-slate-800/50 print:hidden">
                     <div className="flex items-center gap-3 md:gap-6">
                         {/* Mobile Hamburger Menu */}
                         <button

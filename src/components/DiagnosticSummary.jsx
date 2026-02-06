@@ -37,7 +37,7 @@ const DiagnosticSummary = ({ result, onReset }) => {
             animate="show"
             className="max-w-6xl mx-auto space-y-6 pb-20"
         >
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 no-print">
                 <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                     <ClipboardCheck className="text-hospital-teal" />
                     Diagnostic Summary Board
@@ -70,7 +70,7 @@ const DiagnosticSummary = ({ result, onReset }) => {
                         </div>
                         <span className="text-sm font-bold text-hospital-teal uppercase tracking-widest">Primary Diagnosis</span>
                     </div>
-                    <h1 className="text-3xl font-black text-white mb-6 leading-tight">
+                    <h1 className="text-xl font-black text-white mb-6 leading-tight">
                         {result.diagnosis || "Preliminary Finding"}
                     </h1>
                     <div className="space-y-4">
