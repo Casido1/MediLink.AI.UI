@@ -114,26 +114,26 @@ function App() {
                             </div>
                         </div>
 
-                        <div className="h-8 w-[1px] bg-slate-800 mx-2"></div>
+                        <div className="h-8 w-[1px] bg-slate-800 mx-2 hidden md:block"></div>
 
                         {/* Make it Rain Button */}
                         <button
                             onClick={() => setIsRaining(true)}
                             disabled={isRaining}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all ${isRaining
+                            className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl font-bold transition-all ${isRaining
                                 ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
                                 : 'bg-green-600 text-white hover:bg-green-500 hover:scale-105 active:scale-95'
                                 }`}
                             title="Make it rain!"
                         >
                             <DollarSign className={`w-5 h-5 ${!isRaining && 'group-hover:animate-bounce'}`} />
-                            <span className="hidden md:inline">Make it Rain</span>
+                            <span className="hidden lg:inline">Make it Rain</span>
                         </button>
 
-                        <div className="h-8 w-[1px] bg-slate-800 mx-2"></div>
+                        <div className="h-8 w-[1px] bg-slate-800 mx-2 hidden md:block"></div>
 
                         <div className="flex items-center gap-3">
-                            <div className="text-right">
+                            <div className="text-right hidden md:block">
                                 <p className="text-sm font-bold">Dr. Casido</p>
                                 <p className="text-[10px] text-hospital-teal font-black uppercase tracking-widest">Chief Medical Officer</p>
                             </div>
