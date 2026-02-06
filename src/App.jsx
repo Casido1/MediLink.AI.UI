@@ -7,7 +7,8 @@ import {
     Search,
     Cpu,
     UserCheck,
-    Clock
+    Clock,
+    Menu
 } from 'lucide-react';
 
 // Components
@@ -25,6 +26,7 @@ function App() {
     const [currentResult, setCurrentResult] = useState(null);
     const [history, setHistory] = useState([]);
     const [agentStatus, setAgentStatus] = useState('Idle');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         setHistory(historyService.getHistory());
@@ -66,13 +68,20 @@ function App() {
 
     return (
         <div className="min-h-screen flex bg-hospital-dark text-slate-100 font-sans selection:bg-hospital-teal/30">
-            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
 
             <main className="flex-1 h-screen overflow-y-auto relative">
                 {/* Top Header Bar */}
-                <header className="sticky top-0 z-30 flex items-center justify-between px-8 py-4 glass border-b border-slate-800/50">
-                    <div className="flex items-center gap-6">
-                        <div className="relative">
+                <header className="sticky top-0 z-30 flex items-center justify-between px-4 md:px-8 py-4 glass border-b border-slate-800/50">
+                    <div className="flex items-center gap-3 md:gap-6">
+                        {/* Mobile Hamburger Menu */}
+                        <button
+                            onClick={() => setIsSidebarOpen(true)}
+                            className="lg:hidden p-2 rounded-xl bg-slate-800/50 text-slate-300 hover:text-white hover:bg-slate-700 transition-all"
+                        >
+                            <Menu className="w-5 h-5" />
+                        </button>
+                        <div className="relative hidden md:block">
                             <input
                                 type="text"
                                 placeholder="Search history or clinical data..."
