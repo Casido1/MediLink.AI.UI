@@ -8,13 +8,15 @@ import {
     Cpu,
     UserCheck,
     Clock,
-    Menu
+    Menu,
+    DollarSign
 } from 'lucide-react';
 
 // Components
 import Sidebar from './components/Sidebar';
 import ConsultationForm from './components/ConsultationForm';
 import DiagnosticSummary from './components/DiagnosticSummary';
+import MoneyRain from './components/MoneyRain';
 
 // Services
 import { consultationService } from './services/apiService';
@@ -27,6 +29,7 @@ function App() {
     const [history, setHistory] = useState([]);
     const [agentStatus, setAgentStatus] = useState('Idle');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isRaining, setIsRaining] = useState(false);
 
     useEffect(() => {
         setHistory(historyService.getHistory());
@@ -68,6 +71,9 @@ function App() {
 
     return (
         <div className="min-h-screen flex bg-hospital-dark text-slate-100 font-sans selection:bg-hospital-teal/30">
+            {/* Money Rain Effect */}
+            <MoneyRain isActive={isRaining} onComplete={() => setIsRaining(false)} />
+
             <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
 
             <main className="flex-1 h-screen overflow-y-auto relative">
@@ -107,6 +113,22 @@ function App() {
                                 </span>
                             </div>
                         </div>
+
+                        <div className="h-8 w-[1px] bg-slate-800 mx-2"></div>
+
+                        {/* Make it Rain Button */}
+                        <button
+                            onClick={() => setIsRaining(true)}
+                            disabled={isRaining}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all ${isRaining
+                                ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
+                                : 'bg-green-600 text-white hover:bg-green-500 hover:scale-105 active:scale-95'
+                                }`}
+                            title="Make it rain!"
+                        >
+                            <DollarSign className={`w-5 h-5 ${!isRaining && 'group-hover:animate-bounce'}`} />
+                            <span className="hidden md:inline">Make it Rain</span>
+                        </button>
 
                         <div className="h-8 w-[1px] bg-slate-800 mx-2"></div>
 

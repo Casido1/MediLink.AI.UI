@@ -70,7 +70,7 @@ const DiagnosticSummary = ({ result, onReset }) => {
                         </div>
                         <span className="text-sm font-bold text-hospital-teal uppercase tracking-widest">Primary Diagnosis</span>
                     </div>
-                    <h1 className="text-4xl font-black text-white mb-6 leading-tight">
+                    <h1 className="text-3xl font-black text-white mb-6 leading-tight">
                         {result.diagnosis || "Preliminary Finding"}
                     </h1>
                     <div className="space-y-4">
