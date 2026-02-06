@@ -116,11 +116,11 @@ function App() {
 
                         <div className="h-8 w-[1px] bg-slate-800 mx-2 hidden md:block"></div>
 
-                        {/* Make it Rain Button */}
+                        {/* Make it Rain Button - Hidden on Mobile */}
                         <button
                             onClick={() => setIsRaining(true)}
                             disabled={isRaining}
-                            className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl font-bold transition-all ${isRaining
+                            className={`hidden md:flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl font-bold transition-all ${isRaining
                                 ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
                                 : 'bg-green-600 text-white hover:bg-green-500 hover:scale-105 active:scale-95'
                                 }`}
