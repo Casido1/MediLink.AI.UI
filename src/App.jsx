@@ -150,7 +150,7 @@ function App() {
                 </header>
 
                 {/* Content Area */}
-                <div className="p-8">
+                <div className="p-4 md:p-8">
                     <AnimatePresence mode="wait">
                         {activeTab === 'dashboard' && (
                             <motion.div
@@ -160,11 +160,11 @@ function App() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 {!currentResult ? (
-                                    <div className="py-12">
-                                        <div className="max-w-4xl mx-auto mb-12 flex items-center justify-between">
+                                    <div className="py-4 md:py-6">
+                                        <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between">
                                             <div>
-                                                <h1 className="text-4xl font-black text-white mb-2">Welcome Back, 👋</h1>
-                                                <p className="text-slate-400">Ready for a new diagnostic session? Enter the clinical details below.</p>
+                                                <h1 className="text-3xl md:text-4xl font-black text-white mb-1">Welcome Back, 👋</h1>
+                                                <p className="text-slate-400 text-sm">Ready for a new diagnostic session? Enter the clinical details below.</p>
                                             </div>
                                             <div className="hidden lg:flex items-center gap-4 p-4 glass rounded-2xl">
                                                 <div className="p-2 bg-green-500/20 rounded-lg">

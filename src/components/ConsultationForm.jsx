@@ -16,9 +16,9 @@ const ConsultationForm = ({ onStartAnalysis, isLoading }) => {
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-3xl p-8 max-w-4xl mx-auto"
+            className="glass rounded-3xl p-6 md:p-8 max-w-4xl mx-auto"
         >
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 bg-hospital-teal/20 rounded-2xl">
                     <Activity className="w-8 h-8 text-hospital-teal" />
                 </div>
