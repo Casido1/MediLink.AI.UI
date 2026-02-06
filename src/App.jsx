@@ -37,25 +37,30 @@ function App() {
 
     const handleStartAnalysis = async (patientNotes, existingMeds) => {
         setIsLoading(true);
-        setAgentStatus('Diagnostician Thinking...');
-        const loadingToast = toast.loading('Consulting Digital Diagnostician...');
+        setAgentStatus('Diagnostician is working...');
 
         try {
-            // Simulate multiple agent stages for "WOW" factor
-            setTimeout(() => setAgentStatus('Pharmacist Reviewing Drugs...'), 2000);
+            // Simulate agent transition for better UX
+            const pharmacistTransitionTimeout = setTimeout(() => {
+                setAgentStatus('Pharmacist agent is reviewing...');
+            }, 2500);
 
             const result = await consultationService.startAnalysis(patientNotes, existingMeds);
 
-            toast.success('Analysis complete!', { id: loadingToast });
+            clearTimeout(pharmacistTransitionTimeout);
             setCurrentResult(result);
             const newHistory = historyService.saveConsultation(result);
             setHistory(newHistory);
         } catch (error) {
-            toast.error('Diagnostic error. The agents are currently unavailable.', { id: loadingToast });
             console.error(error);
+            // Optionally add a subtle error status
+            setAgentStatus('Error: Agent unavailable');
+            setTimeout(() => setAgentStatus('Idle'), 5000);
         } finally {
             setIsLoading(false);
-            setAgentStatus('Idle');
+            if (agentStatus !== 'Error: Agent unavailable') {
+                setAgentStatus('Idle');
+            }
         }
     };
 
