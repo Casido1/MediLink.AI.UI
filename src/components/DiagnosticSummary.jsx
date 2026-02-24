@@ -24,7 +24,7 @@ const DiagnosticSummary = ({ result, onReset }) => {
     const handleShare = async () => {
         const shareData = {
             title: 'Diagnostic Summary',
-            text: `Diagnosis: ${result.diagnosis}\nRationale: ${result.rationale}\n\nActions:\n${(result.actions || []).join('\n')}`,
+            text: `Diagnosis: ${result.diagnosis}\nRationale: ${result.rationale}\n\nActions:\n${(result.recommendedActions || []).join('\n')}`,
         };
 
         try {
@@ -144,7 +144,7 @@ const DiagnosticSummary = ({ result, onReset }) => {
                         <span className="text-xs font-semibold text-blue-500 uppercase tracking-widest">Recommended Actions</span>
                     </div>
                     <ul className="space-y-4">
-                        {(result.actions || ["Immediate follow-up with specialist", "Blood panel (CBC, Metabolic)", "Rest and hydration"]).map((action, i) => (
+                        {(result.recommendedActions || ["Immediate follow-up with specialist", "Blood panel (CBC, Metabolic)", "Rest and hydration"]).map((action, i) => (
                             <li key={i} className="flex gap-3 text-slate-300 text-sm">
                                 <div className="w-5 h-5 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
                                     <span className="text-[10px] font-medium">{i + 1}</span>
@@ -164,7 +164,7 @@ const DiagnosticSummary = ({ result, onReset }) => {
                         <span className="text-xs font-semibold text-red-500 uppercase tracking-widest">Clinical Alerts</span>
                     </div>
                     <div className="space-y-2.5">
-                        {(result.warnings || ["Seek immediate care if shortness of breath persists", "Avoid strenuous activity", "Monitor temperature"]).map((warning, i) => (
+                        {(result.safetyWarnings || ["Seek immediate care if shortness of breath persists", "Avoid strenuous activity", "Monitor temperature"]).map((warning, i) => (
                             <div key={i} className="flex gap-3 p-3 bg-red-500/5 rounded-xl border border-red-500/10">
                                 <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                                 <span className="text-xs font-medium text-red-200 leading-relaxed">{warning}</span>
