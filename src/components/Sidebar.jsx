@@ -14,12 +14,12 @@ import {
 const SidebarItem = ({ icon: Icon, label, active, onClick, collapsed }) => (
     <button
         onClick={onClick}
-        className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group ${active
-            ? 'bg-hospital-teal text-white glow-teal'
-            : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-100'
+        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group ${active
+            ? 'bg-slate-800/80 text-white font-medium'
+            : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
             }`}
     >
-        <Icon className={`w-5 h-5 shrink-0 ${active ? 'scale-110' : 'group-hover:scale-110'} transition-transform`} />
+        <Icon className={`w-5 h-5 shrink-0 ${active ? 'text-hospital-teal' : 'group-hover:text-slate-300'} transition-colors`} />
         {!collapsed && (
             <motion.span
                 initial={{ opacity: 0, x: -10 }}
@@ -65,20 +65,20 @@ const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOpen }) =
                     width: collapsed ? 80 : 280,
                     x: isSidebarOpen || window.innerWidth >= 1024 ? 0 : -280
                 }}
-                className="glass h-screen fixed lg:sticky top-0 flex flex-col p-4 z-50"
+                className="bg-[#09090b] border-r border-white/5 h-screen fixed lg:sticky top-0 flex flex-col p-4 z-50"
             >
                 {/* Brand */}
                 <div className="flex items-center gap-3 px-2 mb-10 overflow-hidden">
                     {/* Mobile Close Button */}
                     <button
                         onClick={() => setIsSidebarOpen(false)}
-                        className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+                        className="lg:hidden p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
                     >
                         <X className="w-5 h-5" />
                     </button>
 
-                    <div className="p-2 bg-hospital-teal rounded-lg glow-teal">
-                        <Activity className="w-6 h-6 text-white" />
+                    <div className="p-1.5 bg-slate-800 border border-white/10 rounded-md">
+                        <Activity className="w-5 h-5 text-hospital-teal" />
                     </div>
                     {!collapsed && (
                         <motion.div
@@ -86,8 +86,7 @@ const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOpen }) =
                             animate={{ opacity: 1 }}
                             className="flex flex-col"
                         >
-                            <span className="text-xl font-bold tracking-tight text-white">MediLink <span className="text-hospital-teal">AI</span></span>
-                            <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Consultation Hub</span>
+                            <span className="text-lg font-semibold tracking-tight text-white">MediLink <span className="text-hospital-teal">AI</span></span>
                         </motion.div>
                     )}
                 </div>
@@ -126,17 +125,17 @@ const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOpen }) =
                     </button>
                 </div>
 
-                <div className="mt-4 flex items-center gap-3 px-2">
+                <div className="mt-4 flex items-center gap-3 px-2 pt-2 border-t border-white/5">
                     <div className="relative">
-                        <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center">
-                            <ShieldCheck className="w-6 h-6 text-hospital-teal" />
+                        <div className="w-8 h-8 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center">
+                            <ShieldCheck className="w-4 h-4 text-hospital-teal" />
                         </div>
-                        <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-[#0f172a] rounded-full"></div>
+                        <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-[#09090b] rounded-full"></div>
                     </div>
                     {!collapsed && (
                         <div className="flex flex-col">
-                            <span className="text-sm font-semibold text-white">Admin Portal</span>
-                            <span className="text-[10px] text-green-500 uppercase font-bold tracking-tighter">Verified Session</span>
+                            <span className="text-xs font-medium text-white">Admin Portal</span>
+                            <span className="text-[9px] text-green-500 font-medium">Verified Session</span>
                         </div>
                     )}
                 </div>

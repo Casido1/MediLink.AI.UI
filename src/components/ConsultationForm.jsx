@@ -16,23 +16,23 @@ const ConsultationForm = ({ onStartAnalysis, isLoading }) => {
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-3xl p-6 md:p-8 max-w-4xl mx-auto"
+            className="surface p-6 md:p-8 max-w-4xl mx-auto"
         >
             <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-hospital-teal/20 rounded-2xl">
-                    <Activity className="w-8 h-8 text-hospital-teal" />
+                <div className="p-2.5 bg-slate-800 border border-white/10 rounded-xl">
+                    <Activity className="w-6 h-6 text-hospital-teal" />
                 </div>
                 <div>
-                    <h2 className="text-3xl font-bold text-white tracking-tight">New Consultation</h2>
-                    <p className="text-slate-400">Provide patient details for AI-powered diagnostic analysis.</p>
+                    <h2 className="text-2xl font-semibold text-slate-100 tracking-tight">New Consultation</h2>
+                    <p className="text-slate-500 text-sm">Provide patient details for AI-powered diagnostic analysis.</p>
                 </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-sm font-semibold text-slate-300 ml-1">
-                            <User className="w-4 h-4 text-hospital-teal" />
+                        <label className="flex items-center gap-2 text-sm font-medium text-slate-300 ml-1">
+                            <User className="w-4 h-4 text-slate-500" />
                             Patient Symptoms & Clinical Notes
                         </label>
                         <textarea
@@ -40,20 +40,20 @@ const ConsultationForm = ({ onStartAnalysis, isLoading }) => {
                             value={patientNotes}
                             onChange={(e) => setPatientNotes(e.target.value)}
                             placeholder="e.g., Patient reports severe fatigue, joint pain, and a persistent dry cough for 3 weeks..."
-                            className="w-full h-48 bg-slate-900/50 border border-slate-700 rounded-2xl p-4 text-slate-100 placeholder:text-slate-600 focus:ring-2 focus:ring-hospital-teal outline-none transition-all resize-none"
+                            className="w-full h-48 bg-slate-900 border border-white/5 rounded-xl p-4 text-slate-200 placeholder:text-slate-600 focus:border-slate-700 outline-none transition-all resize-none"
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-sm font-semibold text-slate-300 ml-1">
-                            <Pill className="w-4 h-4 text-hospital-teal" />
+                        <label className="flex items-center gap-2 text-sm font-medium text-slate-300 ml-1">
+                            <Pill className="w-4 h-4 text-slate-500" />
                             Current Medications
                         </label>
                         <textarea
                             value={existingMeds}
                             onChange={(e) => setExistingMeds(e.target.value)}
                             placeholder="e.g., Lisinopril 10mg daily, Metformin 500mg daily..."
-                            className="w-full h-48 bg-slate-900/50 border border-slate-700 rounded-2xl p-4 text-slate-100 placeholder:text-slate-600 focus:ring-2 focus:ring-hospital-teal outline-none transition-all resize-none"
+                            className="w-full h-48 bg-slate-900 border border-white/5 rounded-xl p-4 text-slate-200 placeholder:text-slate-600 focus:border-slate-700 outline-none transition-all resize-none"
                         />
                     </div>
                 </div>
@@ -63,22 +63,22 @@ const ConsultationForm = ({ onStartAnalysis, isLoading }) => {
                         type="submit"
                         disabled={isLoading || !patientNotes.trim()}
                         className={`
-              relative flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-white transition-all overflow-hidden
+              relative flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all overflow-hidden
               ${isLoading
-                                ? 'bg-slate-700 cursor-not-allowed'
-                                : 'bg-hospital-teal hover:scale-105 active:scale-95 glow-teal group'}
+                                ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                                : 'bg-slate-100 text-slate-900 hover:bg-white active:scale-95 group'}
             `}
                     >
                         {isLoading ? (
                             <>
-                                <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                <span>Analysing Clinical Data...</span>
+                                <div className="h-4 w-4 border-2 border-slate-500/30 border-t-slate-400 rounded-full animate-spin" />
+                                <span>Analysing Data...</span>
                             </>
                         ) : (
                             <>
-                                <Zap className="w-5 h-5 group-hover:animate-pulse" />
+                                <Zap className="w-4 h-4 text-slate-900" />
                                 <span>Start Diagnostic Analysis</span>
-                                <Send className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                                <Send className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-slate-900" />
                             </>
                         )}
 

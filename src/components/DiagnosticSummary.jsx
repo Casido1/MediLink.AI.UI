@@ -43,18 +43,18 @@ const DiagnosticSummary = ({ result, onReset }) => {
                     Diagnostic Summary Board
                 </h2>
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all font-medium border border-slate-700">
+                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 text-slate-300 hover:bg-slate-800 transition-colors text-sm font-medium">
                         <Share2 className="w-4 h-4" /> Share
                     </button>
                     <button
                         onClick={() => window.print()}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all font-medium border border-slate-700"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 text-slate-300 hover:bg-slate-800 transition-colors text-sm font-medium"
                     >
                         <Printer className="w-4 h-4" /> Print PDF
                     </button>
                     <button
                         onClick={onReset}
-                        className="px-4 py-2 rounded-xl bg-hospital-teal text-white hover:opacity-90 transition-all font-bold"
+                        className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 hover:bg-white transition-colors active:scale-95 text-sm font-medium"
                     >
                         New Case
                     </button>
@@ -63,112 +63,110 @@ const DiagnosticSummary = ({ result, onReset }) => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Main Diagnosis */}
-                <motion.div variants={item} className="lg:col-span-2 glass rounded-3xl p-8 border-l-4 border-hospital-teal">
+                <motion.div variants={item} className="lg:col-span-2 surface p-8">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-hospital-teal/10 p-2 rounded-lg">
-                            <Verified className="w-6 h-6 text-hospital-teal" />
+                        <div className="bg-hospital-teal/10 border border-hospital-teal/20 p-2 rounded-lg">
+                            <Verified className="w-5 h-5 text-hospital-teal" />
                         </div>
-                        <span className="text-sm font-bold text-hospital-teal uppercase tracking-widest">Primary Diagnosis</span>
+                        <span className="text-xs font-semibold text-hospital-teal uppercase tracking-widest">Primary Diagnosis</span>
                     </div>
-                    <h1 className="text-xl font-black text-white mb-6 leading-tight">
+                    <h1 className="text-2xl font-semibold text-slate-100 mb-6 leading-tight tracking-tight">
                         {result.diagnosis || "Preliminary Finding"}
                     </h1>
                     <div className="space-y-4">
-                        <div className="flex items-start gap-4 p-5 bg-slate-900/50 rounded-2xl border border-slate-800">
-                            <Lightbulb className="w-6 h-6 text-yellow-500 shrink-0 mt-1" />
+                        <div className="flex items-start gap-4 p-5 bg-slate-900/50 rounded-xl border border-white/5">
+                            <Lightbulb className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
                             <div>
-                                <h4 className="font-bold text-slate-200 mb-1">Clinical Rationale</h4>
-                                <p className="text-slate-400 leading-relaxed">{result.rationale || "AI analysis of symptoms suggests this condition based on clinical guidelines."}</p>
+                                <h4 className="font-medium text-slate-300 mb-1 text-sm">Clinical Rationale</h4>
+                                <p className="text-slate-400 text-sm leading-relaxed">{result.rationale || "AI analysis of symptoms suggests this condition based on clinical guidelines."}</p>
                             </div>
                         </div>
                     </div>
                 </motion.div>
 
                 {/* Status / Quick Stats */}
-                <motion.div variants={item} className="glass rounded-3xl p-8 flex flex-col justify-center items-center text-center">
-                    <div className="w-20 h-20 rounded-full bg-hospital-teal/20 flex items-center justify-center mb-4 relative">
-                        <Activity className="w-10 h-10 text-hospital-teal" />
-                        <div className="absolute inset-0 border-4 border-hospital-teal rounded-full animate-ping opacity-20"></div>
+                <motion.div variants={item} className="surface p-8 flex flex-col justify-center items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center mb-4">
+                        <Activity className="w-6 h-6 text-hospital-teal" />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-1">Analysis Complete</h3>
-                    <p className="text-slate-500 text-sm">Processed by Multi-Agent Medical System</p>
-                    <div className="mt-8 w-full space-y-3">
-                        <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-slate-500 px-1">
+                    <h3 className="text-lg font-medium text-slate-100 mb-1">Analysis Complete</h3>
+                    <p className="text-slate-500 text-xs">Processed by Multi-Agent Medical System</p>
+                    <div className="mt-8 w-full space-y-2">
+                        <div className="flex justify-between text-[10px] font-semibold uppercase tracking-widest text-slate-500 px-1">
                             <span>Confidence</span>
                             <span className="text-hospital-teal">94%</span>
                         </div>
-                        <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div className="w-full bg-slate-900 border border-white/5 h-1.5 rounded-full overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: '94%' }}
                                 transition={{ duration: 1, delay: 0.5 }}
-                                className="h-full bg-hospital-teal glow-teal"
+                                className="h-full bg-hospital-teal"
                             />
                         </div>
                     </div>
                 </motion.div>
 
                 {/* Recommended Actions */}
-                <motion.div variants={item} className="glass rounded-3xl p-8">
+                <motion.div variants={item} className="surface p-8">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-blue-500/10 p-2 rounded-lg">
-                            <CheckCircle2 className="w-6 h-6 text-blue-500" />
+                        <div className="bg-blue-500/10 border border-blue-500/20 p-2 rounded-lg">
+                            <CheckCircle2 className="w-5 h-5 text-blue-500" />
                         </div>
-                        <span className="text-sm font-bold text-blue-500 uppercase tracking-widest">Recommended Actions</span>
+                        <span className="text-xs font-semibold text-blue-500 uppercase tracking-widest">Recommended Actions</span>
                     </div>
                     <ul className="space-y-4">
                         {(result.actions || ["Immediate follow-up with specialist", "Blood panel (CBC, Metabolic)", "Rest and hydration"]).map((action, i) => (
-                            <li key={i} className="flex gap-3 text-slate-300">
-                                <div className="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center shrink-0 mt-0.5">
-                                    <span className="text-[10px] font-bold">{i + 1}</span>
+                            <li key={i} className="flex gap-3 text-slate-300 text-sm">
+                                <div className="w-5 h-5 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                                    <span className="text-[10px] font-medium">{i + 1}</span>
                                 </div>
-                                <span>{action}</span>
+                                <span className="pt-0.5">{action}</span>
                             </li>
                         ))}
                     </ul>
                 </motion.div>
 
                 {/* Safety Warnings */}
-                <motion.div variants={item} className="glass rounded-3xl p-8 border border-red-500/30 bg-red-500/5">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-red-500/10 p-2 rounded-lg">
-                            <ShieldAlert className="w-6 h-6 text-red-500" />
+                <motion.div variants={item} className="surface p-8 border border-red-500/10">
+                    <div className="flex items-center gap-3 mb-5">
+                        <div className="bg-red-500/10 border border-red-500/20 p-2 rounded-lg">
+                            <ShieldAlert className="w-5 h-5 text-red-500" />
                         </div>
-                        <span className="text-sm font-bold text-red-500 uppercase tracking-widest text-glow-red">Clinical Alerts</span>
+                        <span className="text-xs font-semibold text-red-500 uppercase tracking-widest">Clinical Alerts</span>
                     </div>
-                    <p className="text-slate-400 text-sm italic mb-4">Urgent considerations for this case:</p>
-                    <div className="space-y-3">
+                    <div className="space-y-2.5">
                         {(result.warnings || ["Seek immediate care if shortness of breath persists", "Avoid strenuous activity", "Monitor temperature"]).map((warning, i) => (
-                            <div key={i} className="flex gap-3 p-3 bg-red-500/10 rounded-xl border border-red-500/20">
-                                <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
-                                <span className="text-xs font-semibold text-red-200">{warning}</span>
+                            <div key={i} className="flex gap-3 p-3 bg-red-500/5 rounded-xl border border-red-500/10">
+                                <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                                <span className="text-xs font-medium text-red-200 leading-relaxed">{warning}</span>
                             </div>
                         ))}
                     </div>
                 </motion.div>
 
                 {/* Pharmacist Section */}
-                <motion.div variants={item} className="glass rounded-3xl p-8 border border-amber-500/30 bg-amber-500/5">
+                <motion.div variants={item} className="surface p-8 border border-amber-500/10">
                     <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center gap-3">
-                            <div className="bg-amber-500/10 p-2 rounded-lg">
-                                <Verified className="w-6 h-6 text-amber-500" />
+                            <div className="bg-amber-500/10 border border-amber-500/20 p-2 rounded-lg">
+                                <Verified className="w-5 h-5 text-amber-500" />
                             </div>
-                            <span className="text-sm font-bold text-amber-500 uppercase tracking-widest">Pharmacist's Review</span>
+                            <span className="text-xs font-semibold text-amber-500 uppercase tracking-widest">Pharmacist's Review</span>
                         </div>
-                        <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-500/20 rounded-full border border-amber-500/30">
-                            <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
-                            <span className="text-[10px] font-black text-amber-500 uppercase">Verified Agent</span>
+                        <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
+                            <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                            <span className="text-[10px] font-medium text-amber-500">Verified</span>
                         </div>
                     </div>
 
                     <div className="space-y-4">
-                        <div className="p-4 bg-slate-900/80 rounded-2xl border border-amber-500/20">
-                            <h4 className="text-sm font-bold text-amber-200 mb-2">Drug-Drug Interactions</h4>
+                        <div className="p-4 bg-slate-900/50 rounded-xl border border-white/5">
+                            <h4 className="text-xs font-semibold text-amber-200 mb-2 uppercase tracking-wide">Drug-Drug Interactions</h4>
                             <div className="space-y-2">
                                 {result.interactions?.length > 0 ? (
                                     result.interactions.map((int, i) => (
-                                        <div key={i} className="text-xs text-slate-400 py-2 border-b border-white/5 last:border-0">
+                                        <div key={i} className="text-xs text-slate-300 py-2 border-b border-white/5 last:border-0">
                                             {int}
                                         </div>
                                     ))

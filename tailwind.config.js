@@ -8,9 +8,9 @@ export default {
     extend: {
       colors: {
         hospital: {
-          dark: '#0f172a',
+          dark: '#030712',
           teal: '#0d9488',
-          light: '#1e293b',
+          light: '#111827',
         },
       },
       backdropBlur: {
