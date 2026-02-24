@@ -30,10 +30,16 @@ function App() {
     const [agentStatus, setAgentStatus] = useState('Idle');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isRaining, setIsRaining] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         setHistory(historyService.getHistory());
     }, []);
+
+    const filteredHistory = history.filter(item =>
+        (item.diagnosis || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.rationale || '').toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const handleStartAnalysis = async (patientNotes, existingMeds) => {
         setIsLoading(true);
@@ -92,14 +98,25 @@ function App() {
                         >
                             <Menu className="w-5 h-5" />
                         </button>
-                        <div className="relative hidden md:block">
-                            <input
-                                type="text"
-                                placeholder="Search history or clinical data..."
-                                className="w-80 bg-slate-900 border border-white/5 rounded-full py-2 pl-10 pr-4 text-sm focus:border-slate-700 outline-none transition-all placeholder:text-slate-500"
-                            />
-                            <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
-                        </div>
+                        <AnimatePresence>
+                            {activeTab === 'history' && (
+                                <motion.div
+                                    initial={{ opacity: 0, width: 0 }}
+                                    animate={{ opacity: 1, width: 'auto' }}
+                                    exit={{ opacity: 0, width: 0 }}
+                                    className="relative hidden md:block overflow-hidden"
+                                >
+                                    <input
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        placeholder="Search history or clinical data..."
+                                        className="w-80 bg-slate-900 border border-white/5 rounded-full py-2 pl-10 pr-4 text-sm focus:border-slate-700 outline-none transition-all placeholder:text-slate-500"
+                                    />
+                                    <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-500" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     <div className="flex items-center gap-6">
@@ -196,9 +213,17 @@ function App() {
                                         <h3 className="text-lg font-medium text-slate-300">No consultations yet</h3>
                                         <p className="text-slate-500 text-sm mt-1">Previous diagnostic reports will appear here.</p>
                                     </div>
+                                ) : filteredHistory.length === 0 ? (
+                                    <div className="surface border-dashed p-16 flex flex-col items-center justify-center text-center">
+                                        <div className="p-4 bg-slate-800/50 rounded-full mb-4">
+                                            <Search className="w-8 h-8 text-slate-500" />
+                                        </div>
+                                        <h3 className="text-lg font-medium text-slate-300">No matching records</h3>
+                                        <p className="text-slate-500 text-sm mt-1">Try adjusting your search terms.</p>
+                                    </div>
                                 ) : (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        {history.map((item) => (
+                                        {filteredHistory.map((item) => (
                                             <motion.div
                                                 key={item.id}
                                                 whileHover={{ y: -2 }}
