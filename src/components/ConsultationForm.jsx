@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Zap, Activity, Pill, User } from 'lucide-react';
 
-const ConsultationForm = ({ onStartAnalysis, isLoading }) => {
+const ConsultationForm = ({ onStartAnalysis, isLoading, agentStatus }) => {
     const [patientNotes, setPatientNotes] = useState('');
     const [existingMeds, setExistingMeds] = useState('');
 
@@ -71,8 +71,8 @@ const ConsultationForm = ({ onStartAnalysis, isLoading }) => {
                     >
                         {isLoading ? (
                             <>
-                                <div className="h-4 w-4 border-2 border-slate-500/30 border-t-slate-400 rounded-full animate-spin" />
-                                <span>Analysing Data...</span>
+                                <div className="h-4 w-4 border-2 border-slate-500/30 border-t-slate-400 rounded-full animate-spin shrink-0" />
+                                <span className="truncate max-w-[200px]">{agentStatus !== 'Idle' ? agentStatus : 'Analysing Data...'}</span>
                             </>
                         ) : (
                             <>

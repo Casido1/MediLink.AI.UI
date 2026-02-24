@@ -103,15 +103,7 @@ function App() {
                     </div>
 
                     <div className="flex items-center gap-6">
-                        {/* Live Agent Status */}
-                        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 text-xs font-medium">
-                            <div className={`w-2 h-2 rounded-full ${agentStatus !== 'Idle' ? 'bg-hospital-teal animate-pulse' : 'bg-slate-500'}`}></div>
-                            <span className={agentStatus !== 'Idle' ? 'text-hospital-teal' : 'text-slate-400'}>
-                                {agentStatus !== 'Idle' ? agentStatus : 'Agents Ready'}
-                            </span>
-                        </div>
 
-                        <div className="h-8 w-[1px] bg-slate-800 mx-2 hidden md:block"></div>
 
                         {/* Make it Rain Button - Hidden on Mobile */}
                         <button
@@ -167,7 +159,7 @@ function App() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <ConsultationForm onStartAnalysis={handleStartAnalysis} isLoading={isLoading} />
+                                        <ConsultationForm onStartAnalysis={handleStartAnalysis} isLoading={isLoading} agentStatus={agentStatus} />
                                     </div>
                                 ) : (
                                     <DiagnosticSummary result={currentResult} onReset={handleReset} />
