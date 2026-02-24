@@ -22,6 +22,27 @@ import MoneyRain from './components/MoneyRain';
 import { consultationService } from './services/apiService';
 import { historyService } from './services/historyService';
 
+const HighlightText = ({ text, highlight }) => {
+    if (!highlight.trim()) {
+        return <>{text}</>;
+    }
+    const regex = new RegExp(`(${highlight})`, 'gi');
+    const parts = text.split(regex);
+    return (
+        <>
+            {parts.map((part, i) =>
+                regex.test(part) ? (
+                    <mark key={i} className="bg-hospital-teal/30 text-hospital-teal px-0.5 rounded">
+                        {part}
+                    </mark>
+                ) : (
+                    <span key={i}>{part}</span>
+                )
+            )}
+        </>
+    );
+};
+
 function App() {
     const [activeTab, setActiveTab] = useState('dashboard');
     const [isLoading, setIsLoading] = useState(false);
@@ -236,8 +257,12 @@ function App() {
                                                         Verified
                                                     </div>
                                                 </div>
-                                                <h4 className="text-base font-medium text-slate-200 group-hover:text-slate-100 transition-colors line-clamp-1">{item.diagnosis}</h4>
-                                                <p className="text-sm text-slate-500 line-clamp-2 mt-1">{item.rationale}</p>
+                                                <h4 className="text-base font-medium text-slate-200 group-hover:text-slate-100 transition-colors line-clamp-1">
+                                                    <HighlightText text={item.diagnosis} highlight={searchQuery} />
+                                                </h4>
+                                                <p className="text-sm text-slate-500 line-clamp-2 mt-1">
+                                                    <HighlightText text={item.rationale} highlight={searchQuery} />
+                                                </p>
                                             </motion.div>
                                         ))}
                                     </div>
