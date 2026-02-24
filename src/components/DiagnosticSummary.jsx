@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { toast } from 'react-hot-toast';
 import {
     ShieldAlert,
     ClipboardCheck,
@@ -14,6 +15,25 @@ import {
 
 const DiagnosticSummary = ({ result, onReset }) => {
     if (!result) return null;
+
+    const handleShare = async () => {
+        const shareData = {
+            title: 'Diagnostic Summary',
+            text: `Diagnosis: ${result.diagnosis}\nRationale: ${result.rationale}\n\nActions:\n${(result.actions || []).join('\n')}`,
+        };
+
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                // Fallback to clipboard
+                await navigator.clipboard.writeText(shareData.text);
+                toast.success('Summary copied to clipboard!');
+            }
+        } catch (err) {
+            console.error('Error sharing:', err);
+        }
+    };
 
     const container = {
         hidden: { opacity: 0 },
@@ -43,7 +63,10 @@ const DiagnosticSummary = ({ result, onReset }) => {
                     Diagnostic Summary Board
                 </h2>
                 <div className="flex gap-3">
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 text-slate-300 hover:bg-slate-800 transition-colors text-sm font-medium">
+                    <button
+                        onClick={handleShare}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 text-slate-300 hover:bg-slate-800 transition-colors text-sm font-medium"
+                    >
                         <Share2 className="w-4 h-4" /> Share
                     </button>
                     <button
