@@ -2,26 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MoneyRain = ({ isActive, onComplete }) => {
-    const [bills, setBills] = useState([]);
+    const [drops, setDrops] = useState([]);
 
     useEffect(() => {
         if (isActive) {
-            // Generate 50 dollar bills with random positions and delays
-            const newBills = Array.from({ length: 50 }, (_, i) => ({
+            // Generate 150 raindrops with random positions and delays
+            const newDrops = Array.from({ length: 150 }, (_, i) => ({
                 id: i,
                 left: Math.random() * 100,
-                delay: Math.random() * 2,
-                duration: 3 + Math.random() * 2,
-                rotation: Math.random() * 360,
-                size: 40 + Math.random() * 20,
+                delay: Math.random() * 1.5, // Faster spawn
+                duration: 0.8 + Math.random() * 0.5, // Faster fall
+                height: 10 + Math.random() * 20, // Random height for depth
+                opacity: 0.3 + Math.random() * 0.5,
             }));
-            setBills(newBills);
+            setDrops(newDrops);
 
-            // Clear bills after animation
+            // Clear drops after animation
             const timeout = setTimeout(() => {
-                setBills([]);
+                setDrops([]);
                 onComplete();
-            }, 6000);
+            }, 4000);
 
             return () => clearTimeout(timeout);
         }
@@ -30,31 +30,27 @@ const MoneyRain = ({ isActive, onComplete }) => {
     return (
         <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
             <AnimatePresence>
-                {bills.map((bill) => (
+                {drops.map((drop) => (
                     <motion.div
-                        key={bill.id}
+                        key={drop.id}
                         initial={{
                             top: -100,
-                            left: `${bill.left}%`,
-                            rotate: bill.rotation,
+                            left: `${drop.left}%`,
                             opacity: 0,
                         }}
                         animate={{
-                            top: '110vh',
-                            rotate: bill.rotation + 720,
-                            opacity: [0, 1, 1, 0],
+                            top: '120vh',
+                            opacity: [0, drop.opacity, drop.opacity, 0],
                         }}
                         exit={{ opacity: 0 }}
                         transition={{
-                            duration: bill.duration,
-                            delay: bill.delay,
+                            duration: drop.duration,
+                            delay: drop.delay,
                             ease: 'linear',
                         }}
-                        className="absolute"
-                        style={{ fontSize: `${bill.size}px` }}
-                    >
-                        💵
-                    </motion.div>
+                        className="absolute w-0.5 bg-gradient-to-b from-transparent to-blue-400 rounded-full"
+                        style={{ height: `${drop.height}px` }}
+                    />
                 ))}
             </AnimatePresence>
         </div>

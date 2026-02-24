@@ -9,7 +9,7 @@ import {
     UserCheck,
     Clock,
     Menu,
-    DollarSign
+    CloudRain
 } from 'lucide-react';
 
 // Components
@@ -123,7 +123,7 @@ function App() {
                                 }`}
                             title="Make it rain!"
                         >
-                            <DollarSign className={`w-5 h-5 ${!isRaining && 'group-hover:animate-bounce'}`} />
+                            <CloudRain className={`w-5 h-5 ${!isRaining && 'group-hover:animate-bounce'}`} />
                             <span className="hidden lg:inline">Make it Rain</span>
                         </button>
 
